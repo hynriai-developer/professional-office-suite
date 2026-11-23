@@ -190,7 +190,8 @@
       </div>
       <div><label for="msg">Tell us about your business</label><textarea id="msg" rows="4" placeholder="Type of business, number of people, ideal move-in date"></textarea></div>
       <button class="btn" type="submit">Send Inquiry</button>
-      <p class="note" style="margin:0">This opens your email app with your inquiry ready to send.</p>
+      <input id="website" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <p class="note" id="formNote" style="margin:0" role="status">We reply by email, usually within one business day.</p>
     </form>
   </div>
 </section>
@@ -295,9 +296,22 @@
   document.getElementById('yr').textContent = new Date().getFullYear();
   document.getElementById('inquiry').addEventListener('submit', function(e){
     e.preventDefault();
+    var form = e.target, btn = form.querySelector('button'), note = document.getElementById('formNote');
     var g = function(id){ return document.getElementById(id).value; };
-    var body = 'Name: '+g('name')+'\nPhone: '+g('phone')+'\nEmail: '+g('email')+'\nInterested in: '+g('suite')+'\n\n'+g('msg');
-    location.href = 'mailto:conniebarrettllc@gmail.com?subject='+encodeURIComponent('Office suite inquiry: '+g('suite'))+'&body='+encodeURIComponent(body);
+    var fd = new FormData();
+    ['name','phone','email','suite','msg'].forEach(function(k){ fd.append(k, g(k)); });
+    fd.append('website', g('website'));
+    btn.disabled = true; btn.textContent = 'Sending...';
+    function fallback(){
+      var body = 'Name: '+g('name')+'\nPhone: '+g('phone')+'\nEmail: '+g('email')+'\nInterested in: '+g('suite')+'\n\n'+g('msg');
+      note.textContent = 'We could not send that automatically. Your email app should open with your inquiry, or email conniebarrettllc@gmail.com directly.';
+      location.href = 'mailto:conniebarrettllc@gmail.com?subject='+encodeURIComponent('Office suite inquiry: '+g('suite'))+'&body='+encodeURIComponent(body);
+      btn.disabled = false; btn.textContent = 'Send Inquiry';
+    }
+    fetch('inquiry.php', {method:'POST', body:fd}).then(function(r){ return r.json(); }).then(function(j){
+      if (j && j.ok) { form.reset(); note.textContent = 'Thank you. Your inquiry was sent and we will be in touch soon.'; btn.disabled = false; btn.textContent = 'Send Inquiry'; }
+      else fallback();
+    }).catch(fallback);
   });
 </script>
 </body>
