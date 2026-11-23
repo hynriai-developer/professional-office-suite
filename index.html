@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professional Office Suite | Office Space for Lease in Pasco County, FL</title>
+<meta name="description" content="Professional office suites for lease in Port Richey, Trinity and Spring Hill, Florida. Flexible terms for small businesses, practices and service professionals.">
+<style>
+  :root{
+    --navy:#14263f; --navy-2:#1d3556; --gold:#b98a3e; --gold-d:#9a7230;
+    --ink:#1f2933; --muted:#5b6672; --line:#e3e7ec; --bg:#f6f7f9; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--white);line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--navy);font-size:17px;text-transform:uppercase}
+  .logo span{color:var(--gold)}
+  nav a{margin-left:26px;text-decoration:none;font-size:14px;color:var(--muted)}
+  nav a:hover{color:var(--navy)}
+  nav a.cta{background:var(--navy);color:#fff;padding:9px 18px;border-radius:4px}
+  nav a.cta:hover{background:var(--navy-2)}
+
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;padding:96px 0 88px}
+  .hero h1{font-size:clamp(32px,5vw,50px);line-height:1.15;max-width:720px;margin-bottom:20px}
+  .hero p{font-size:18px;max-width:600px;color:#d5dde8;margin-bottom:34px}
+  .btn{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;padding:14px 28px;border-radius:4px;font-weight:700;font-size:15px;border:0;cursor:pointer}
+  .btn:hover{background:var(--gold-d)}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.5);margin-left:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.1)}
+
+  section{padding:76px 0}
+  section.alt{background:var(--bg)}
+  .eyebrow{color:var(--gold-d);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+  h2{font-size:clamp(26px,3.5vw,34px);color:var(--navy);margin-bottom:14px;line-height:1.2}
+  .lead{color:var(--muted);max-width:640px;margin-bottom:40px}
+
+  .grid{display:grid;gap:22px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:28px}
+  .card h3{color:var(--navy);font-size:19px;margin-bottom:4px}
+  .card .city{color:var(--gold-d);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+  .card p{color:var(--muted);font-size:15px}
+  .tag{display:inline-block;margin-top:16px;font-size:13px;padding:4px 10px;border-radius:20px;background:#eef3ea;color:#3d6b2c;font-weight:700}
+  .tag.none{background:#f0f1f3;color:var(--muted)}
+  .why .card{border-top:3px solid var(--gold)}
+
+  .avail{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .avail th,.avail td{text-align:left;padding:15px 20px;font-size:15px;border-bottom:1px solid var(--line)}
+  .avail th{background:var(--navy);color:#fff;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  .avail tr:last-child td{border-bottom:0}
+  .avail a{color:var(--gold-d);font-weight:700;text-decoration:none}
+  .note{color:var(--muted);font-size:14px;margin-top:14px}
+
+  form{background:#fff;border:1px solid var(--line);border-radius:6px;padding:32px;display:grid;gap:16px}
+  .row{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+  label{font-size:13px;font-weight:700;color:var(--navy);display:block;margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px 14px;border:1px solid #cdd3da;border-radius:4px;font:inherit;font-size:15px;color:var(--ink);background:#fff}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+  .contact-grid{display:grid;gap:40px;grid-template-columns:1fr 1.3fr;align-items:start}
+  .contact-info p{margin-bottom:14px;color:var(--muted)}
+  .contact-info strong{color:var(--navy);display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+
+  .map-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .map-tabs button{background:#fff;border:1px solid var(--line);color:var(--navy);padding:10px 18px;border-radius:4px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  .map-tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .map-box{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
+  .map-box iframe{display:block;width:100%;height:420px;border:0}
+  .map-meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:16px 20px;font-size:15px}
+  .map-meta a{color:var(--gold-d);font-weight:700;text-decoration:none}
+  .addr{font-size:14px;color:var(--navy);margin-top:10px;font-weight:700}
+
+  .office{display:grid;gap:28px;grid-template-columns:1.1fr 1fr;align-items:start}
+  .ph{background:linear-gradient(135deg,#e9edf2,#dde3ea);border:1px dashed #b8c2cf;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#7a8794;font-size:14px;text-align:center;padding:12px}
+  .ph.front{aspect-ratio:4/3}
+  img.front,img.unit{width:100%;display:block;border-radius:6px;object-fit:cover}
+  img.front{aspect-ratio:4/3}
+  .office h3{color:var(--navy);font-size:24px;margin-bottom:4px}
+  .office .city{color:var(--gold-d);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .office p{color:var(--muted);margin:10px 0 0}
+  .units-h{margin:44px 0 18px;color:var(--navy);font-size:20px}
+  .units{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+  .unit{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .unit .ph{aspect-ratio:4/3;border:0;border-bottom:1px dashed #b8c2cf;border-radius:0}
+  .unit img.unit{aspect-ratio:4/3;border-radius:0}
+  .thumbs{display:flex;gap:8px;padding:10px 12px 0}
+  .thumbs img{width:64px;height:48px;object-fit:cover;border-radius:4px;cursor:pointer;opacity:.6;border:2px solid transparent}
+  .thumbs img.on{opacity:1;border-color:var(--gold)}
+  .unit-b{padding:18px 20px}
+  .unit-b h4{color:var(--navy);font-size:18px;margin-bottom:6px}
+  .unit-b .sz{color:var(--muted);font-size:15px}
+  .unit-b a{display:inline-block;margin-top:12px;color:var(--gold-d);font-weight:700;text-decoration:none;font-size:15px}
+  .units .empty{grid-column:1/-1;color:var(--muted);background:var(--bg);border-radius:6px;padding:22px}
+  @media(max-width:780px){.office{grid-template-columns:1fr}}
+
+  footer{background:var(--navy);color:#b9c5d6;padding:34px 0;font-size:14px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+  footer a{text-decoration:none}
+
+  @media(max-width:780px){
+    nav a:not(.cta){display:none}
+    .contact-grid{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr}
+    .btn.ghost{margin:12px 0 0}
+    .hero{padding:64px 0}
+    section{padding:54px 0}
+    .avail th:nth-child(3),.avail td:nth-child(3){display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">Professional <span>Office</span> Suite</a>
+    <nav>
+      <a href="#offices">Offices</a>
+      <a href="#why">Why Lease With Us</a>
+      <a class="cta" href="#contact">Inquire</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Office space that works as hard as you do.</h1>
+    <p>Professional office suites for lease across Pasco County. Straightforward terms, well-kept buildings, and a landlord who answers the phone.</p>
+    <a class="btn" href="#offices">See Available Suites</a>
+    <a class="btn ghost" href="#contact">Request a Tour</a>
+  </div>
+</div>
+
+<section id="offices">
+  <div class="wrap">
+    <div class="eyebrow">Our Offices</div>
+    <h2>Three office plazas, one local owner.</h2>
+    <p class="lead">Choose a location to see the building, its map and the units currently available.</p>
+    <div class="map-tabs" id="officeTabs"></div>
+    <div id="officePanel"></div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <div class="wrap">
+    <div class="eyebrow">Why Lease With Us</div>
+    <h2>A simple, professional leasing experience.</h2>
+    <p class="lead">We own and manage our plazas directly, so you deal with the owner, not a call center.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Flexible lease terms</h3><p>Month-to-month and annual lease options, so you can start small and grow into more space.</p></div>
+      <div class="card"><h3>Direct ownership</h3><p>One local owner for all three plazas. Questions and maintenance requests go to a real person.</p></div>
+      <div class="card"><h3>Room to expand</h3><p>Many tenants started in one suite and added more as their business grew. Adjoining suites are often available.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="alt">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <div class="eyebrow">Get in Touch</div>
+      <h2>Request a tour or pricing.</h2>
+      <p>Tell us what you are looking for and we will get back to you promptly.</p>
+      <p><strong>Email</strong><a href="mailto:conniebarrettllc@gmail.com">conniebarrettllc@gmail.com</a></p>
+      <p><strong>Office</strong>301 Bay St<br>Tarpon Springs, FL 34689</p>
+    </div>
+    <form id="inquiry">
+      <div class="row">
+        <div><label for="name">Your name</label><input id="name" required></div>
+        <div><label for="phone">Phone</label><input id="phone" type="tel"></div>
+      </div>
+      <div><label for="email">Email</label><input id="email" type="email" required></div>
+      <div>
+        <label for="suite">Interested in</label>
+        <select id="suite">
+          <option>Not sure yet</option>
+          <option>Oak Trail Way, Suite 102</option>
+          <option>Oak Trail Way, Suite 105</option>
+          <option>Oak Trail Way, Suite 108</option>
+          <option>Seven Springs Boulevard, Suite 406</option>
+          <option>Mariner Boulevard, Suite 202</option>
+          <option>Mariner Boulevard, Suite 203</option>
+          <option>Mariner Boulevard (future openings)</option>
+        </select>
+      </div>
+      <div><label for="msg">Tell us about your business</label><textarea id="msg" rows="4" placeholder="Type of business, number of people, ideal move-in date"></textarea></div>
+      <button class="btn" type="submit">Send Inquiry</button>
+      <p class="note" style="margin:0">This opens your email app with your inquiry ready to send.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="yr"></span> Professional Office Suite. Owned and managed by Connie Barrett LLC.</div>
+    <div>Port Richey &bull; Trinity &bull; Spring Hill, Florida</div>
+  </div>
+</footer>
+
+<script>
+
+  /* ====== EDIT HERE: office photos and unit details ======
+     Photos live in images/Port Richey, images/Trinity and images/Spring Hill (file names must match exactly).
+     front: front-of-building photo (blank = placeholder). units: suite name, size (e.g. "450 sq ft"), photos. */
+  var OFFICES = [
+    { id:'port-richey', tab:'Port Richey', name:'Oak Trail Way', city:'Port Richey',
+      addr:'11923 Oak Trail Way, Port Richey, FL 34668', mapq:'11923 Oak Trail Way, Port Richey, FL 34668',
+      blurb:'Professional suites in a Port Richey office building, from single rooms to larger multi-room spaces.',
+      front:'images/Port Richey/PR Front.jpg',
+      shared:[ {name:'Public Classroom', desc:'A shared classroom available to all tenants of the building.', size:'', photos:['images/Port Richey/PR Classroom.jpg']} ],
+      units:[ {suite:'Suite 102', size:'', photos:['images/Port Richey/PR 102.jpg','images/Port Richey/PR 102-2.jpg']},
+              {suite:'Suite 105', size:'', photo:''}, {suite:'Suite 108', size:'', photo:''} ] },
+    { id:'trinity', tab:'Trinity', name:'Seven Springs Boulevard', city:'Trinity',
+      addr:'2144 Seven Springs Blvd, Trinity, FL 34655', mapq:'2144 Seven Springs Blvd, Trinity, FL 34655',
+      blurb:'Office suites along the Seven Springs corridor, convenient for clients across west Pasco and north Pinellas.',
+      front:'images/Trinity/TR Front.jpg',
+      shared:[ {name:'Lobby & Waiting Area', desc:'A welcoming shared lobby and waiting area for tenants and their clients.', size:'', photos:['images/Trinity/TR Lobby.jpg','images/Trinity/TR Lobby-3.jpg','images/Trinity/TR Lobby-2.jpg']} ],
+      units:[ {suite:'Suite 406', size:'', photo:''} ] },
+    { id:'spring-hill', tab:'Spring Hill', name:'Mariner Boulevard', city:'Spring Hill',
+      addr:'2166\u20132176 Mariner Blvd, Spring Hill, FL 34609', mapq:'2172 Mariner Blvd, Spring Hill, FL 34609',
+      blurb:'Office and retail-style spaces on Mariner Boulevard, a busy Spring Hill commercial route.',
+      front:'',
+      units:[ {suite:'Suite 202', size:'', photos:['images/Spring Hill/SH 202.jpg','images/Spring Hill/SH 202-2.jpg']},
+              {suite:'Suite 203', size:'', photos:['images/Spring Hill/SH 203.jpg','images/Spring Hill/SH 203-2.jpg','images/Spring Hill/SH 203-3.jpg']} ] }
+  ];
+
+  function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+  function renderOffice(o){
+    var q = encodeURIComponent(o.mapq);
+    var front = o.front ? '<img class="front" src="'+esc(o.front)+'" alt="Front of '+esc(o.name)+' office building">'
+                        : '<div class="ph front">Front-of-building photo coming soon</div>';
+    var units = o.units.length ? o.units.map(function(u){
+      var pics = u.photos || (u.photo ? [u.photo] : []);
+      var alt = esc(o.name+' '+u.suite);
+      var ph = pics.length ? '<img class="unit" src="'+esc(pics[0])+'" alt="'+alt+'">' : '<div class="ph">Unit photo coming soon</div>';
+      if (pics.length > 1) {
+        ph += '<div class="thumbs">'+pics.map(function(src,i){
+          return '<img src="'+esc(src)+'" alt="'+alt+' photo '+(i+1)+'" class="'+(i===0?'on':'')+'" data-src="'+esc(src)+'">';
+        }).join('')+'</div>';
+      }
+      var size = u.size ? esc(u.size) : 'Size: to be added';
+      return '<div class="unit">'+ph+'<div class="unit-b"><h4>'+esc(u.suite)+'</h4><div class="sz">'+size+'</div>'+
+             '<a href="#contact" data-suite="'+esc(o.name+', '+u.suite)+'">Inquire about this unit &rarr;</a></div></div>';
+    }).join('') : '<div class="empty">No units are listed here right now. Contact us about upcoming openings.</div>';
+    var shared = (o.shared||[]).map(function(x){
+      var pics=x.photos||[];
+      var ph = pics.length ? '<img class="unit" src="'+esc(pics[0])+'" alt="'+esc(x.name)+'">' : '<div class="ph">Photo coming soon</div>';
+      if (pics.length > 1) {
+        ph += '<div class="thumbs">'+pics.map(function(src,i){
+          return '<img src="'+esc(src)+'" alt="'+esc(x.name)+' photo '+(i+1)+'" class="'+(i===0?'on':'')+'" data-src="'+esc(src)+'">';
+        }).join('')+'</div>';
+      }
+      return '<div class="unit">'+ph+'<div class="unit-b"><h4>'+esc(x.name)+'</h4><div class="sz">'+esc(x.desc||'')+'</div>'+
+             (x.size?'<div class="sz">'+esc(x.size)+'</div>':'')+'</div></div>';
+    }).join('');
+    var sharedHtml = shared ? '<h3 class="units-h">Shared space for tenants</h3><div class="units">'+shared+'</div>' : '';
+    document.getElementById('officePanel').innerHTML =
+      '<div class="office"><div>'+front+'</div><div><div class="city">'+esc(o.city)+'</div><h3>'+esc(o.name)+'</h3>'+
+      '<div class="addr">'+o.addr+'</div><p>'+esc(o.blurb)+'</p>'+
+      '<p><a style="color:var(--gold-d);font-weight:700;text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination='+q+'">Get directions &rarr;</a></p></div></div>'+
+      '<div class="map-box" style="margin-top:28px"><iframe title="Map of '+esc(o.name)+'" loading="lazy" src="https://maps.google.com/maps?q='+q+'&z=16&output=embed"></iframe></div>'+
+      '<h3 class="units-h">Available units at '+esc(o.name)+'</h3><div class="units">'+units+'</div>'+sharedHtml;
+    document.querySelectorAll('#officePanel .thumbs img').forEach(function(t){
+      t.addEventListener('click', function(){
+        var card=t.closest('.unit'); card.querySelector('img.unit').src=t.dataset.src;
+        card.querySelectorAll('.thumbs img').forEach(function(x){x.classList.remove('on')}); t.classList.add('on');
+      });
+    });
+    document.querySelectorAll('#officePanel [data-suite]').forEach(function(a){
+      a.addEventListener('click', function(){ document.getElementById('suite').value = a.dataset.suite; });
+    });
+  }
+  var tabs = document.getElementById('officeTabs');
+  OFFICES.forEach(function(o,i){
+    var b=document.createElement('button'); b.textContent=o.tab; if(i===0)b.className='on';
+    b.addEventListener('click', function(){
+      tabs.querySelectorAll('button').forEach(function(x){x.classList.remove('on')}); b.classList.add('on'); renderOffice(o);
+    });
+    tabs.appendChild(b);
+  });
+  renderOffice(OFFICES[0]);
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  document.getElementById('inquiry').addEventListener('submit', function(e){
+    e.preventDefault();
+    var g = function(id){ return document.getElementById(id).value; };
+    var body = 'Name: '+g('name')+'\nPhone: '+g('phone')+'\nEmail: '+g('email')+'\nInterested in: '+g('suite')+'\n\n'+g('msg');
+    location.href = 'mailto:conniebarrettllc@gmail.com?subject='+encodeURIComponent('Office suite inquiry: '+g('suite'))+'&body='+encodeURIComponent(body);
+  });
+</script>
+</body>
+</html>
