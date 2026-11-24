@@ -99,6 +99,8 @@
   .pic::before{content:"";position:absolute;inset:-40px;background:var(--bg) center/cover;filter:blur(26px) saturate(1.15) brightness(.97);z-index:-1}
   .pic img{width:100%;height:100%;display:block;object-fit:contain;background:none;border:0;border-radius:0;box-shadow:none;transform:none!important}
   .unit .pic{border-radius:0}
+  .plan{aspect-ratio:4/3;background:linear-gradient(135deg,#f1f8f8,#e2eff0);border-bottom:1px solid var(--line);display:grid;place-items:center}
+  .plan svg{width:100%;height:100%;display:block}
   .map-box{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 12px 30px rgba(13,42,56,.07)}
   .map-box iframe{display:block;width:100%;height:400px;border:0}
   .units-h{margin:56px 0 20px;font-family:var(--serif);font-weight:400;color:var(--ink);font-size:32px;line-height:1.15}
@@ -324,9 +326,9 @@
            {name:'Conference Room', desc:'A large conference room available to tenants of the building.', size:'11′9″ × 17′9″ · about 209 sq ft', photos:['images/Port Richey/PR Conference Room.jpg']},
            {name:'Small Meeting Room', desc:'A private round-table meeting room for small client meetings.', size:'9′2″ × 11′3″ · about 103 sq ft', photos:['images/Port Richey/PR Meeting Room.jpg']},
            {name:'Media Room (Suite 101)', desc:'A shared media room with studio lighting and a backdrop, available to tenants.', size:'15′10″ × 10′2″ · about 161 sq ft', photos:['images/Port Richey/PR Media Room.jpg']} ],
-      units:[ {suite:'Suite 102', size:'10′5″ × 10′9″ · about 112 sq ft', photos:['images/Port Richey/PR 102.jpg','images/Port Richey/PR 102-2.jpg']},
-              {suite:'Suite 105', size:'', photo:''}, {suite:'Suite 111', size:'11′4″ × 10′1″ · about 114 sq ft', photo:''},
-              {suite:'Suite 108', size:'11′5″ × 10′8″ · about 122 sq ft', photos:['images/Port Richey/PR 108.jpg','images/Port Richey/PR 108-2.jpg']} ] },
+      units:[ {suite:'Suite 102', w:125, l:129, size:'10′5″ × 10′9″ · about 112 sq ft', photos:['images/Port Richey/PR 102.jpg','images/Port Richey/PR 102-2.jpg']},
+              {suite:'Suite 105', size:'', photo:''}, {suite:'Suite 111', w:136, l:121, size:'11′4″ × 10′1″ · about 114 sq ft', photo:''},
+              {suite:'Suite 108', w:137, l:128, size:'11′5″ × 10′8″ · about 122 sq ft', photos:['images/Port Richey/PR 108.jpg','images/Port Richey/PR 108-2.jpg']} ] },
     { id:'trinity', tab:'Trinity', name:'Seven Springs Boulevard', city:'Trinity',
       addr:'2144 Seven Springs Blvd, Trinity, FL 34655', mapq:'2144 Seven Springs Blvd, Trinity, FL 34655',
       blurb:'Office suites along the Seven Springs corridor, convenient for clients across west Pasco and north Pinellas.',
@@ -346,6 +348,26 @@
   function pic(src, cls, alt){
     return '<div class="pic '+cls+'" style="--bg:url(&quot;'+encodeURI(src)+'&quot;)"><img class="'+(cls==='pic-front'?'front':'unit')+'" src="'+esc(src)+'" alt="'+alt+'" data-full="'+esc(src)+'"></div>';
   }
+  function ftin(n){ return Math.floor(n/12)+'\u2032'+(n%12)+'\u2033'; }
+  function plan(u){
+    var W=400,H=300,mx=58,my=52, aw=W-2*mx, ah=H-2*my;
+    var sc=Math.min(aw/u.w, ah/u.l), rw=u.w*sc, rh=u.l*sc, x=(W-rw)/2, y=(H-rh)/2;
+    var g='';
+    for (var i=1;i<Math.floor(u.w/12);i++){ var gx=x+i*12*sc; g+='<line x1="'+gx+'" y1="'+y+'" x2="'+gx+'" y2="'+(y+rh)+'"/>'; }
+    for (var j=1;j<Math.floor(u.l/12);j++){ var gy=y+j*12*sc; g+='<line x1="'+x+'" y1="'+gy+'" x2="'+(x+rw)+'" y2="'+gy+'"/>'; }
+    var sq=Math.round(u.w*u.l/144);
+    return '<div class="plan" role="img" aria-label="Floor plan to scale, '+ftin(u.w)+' by '+ftin(u.l)+', about '+sq+' square feet">'+
+      '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+
+      '<g stroke="#bcd3d5" stroke-width="1">'+g+'</g>'+
+      '<rect x="'+x+'" y="'+y+'" width="'+rw+'" height="'+rh+'" fill="rgba(31,122,120,.07)" stroke="#0d2a38" stroke-width="3"/>'+
+      '<g stroke="#0d2a38" stroke-width="1.5"><line x1="'+x+'" y1="'+(y-18)+'" x2="'+(x+rw)+'" y2="'+(y-18)+'"/><line x1="'+x+'" y1="'+(y-24)+'" x2="'+x+'" y2="'+(y-12)+'"/><line x1="'+(x+rw)+'" y1="'+(y-24)+'" x2="'+(x+rw)+'" y2="'+(y-12)+'"/>'+
+      '<line x1="'+(x-18)+'" y1="'+y+'" x2="'+(x-18)+'" y2="'+(y+rh)+'"/><line x1="'+(x-24)+'" y1="'+y+'" x2="'+(x-12)+'" y2="'+y+'"/><line x1="'+(x-24)+'" y1="'+(y+rh)+'" x2="'+(x-12)+'" y2="'+(y+rh)+'"/></g>'+
+      '<g font-family="Figtree,Arial,sans-serif" fill="#0d2a38" text-anchor="middle">'+
+      '<text x="'+(x+rw/2)+'" y="'+(y-26)+'" font-size="15" font-weight="700">'+ftin(u.w)+'</text>'+
+      '<text transform="translate('+(x-28)+' '+(y+rh/2)+') rotate(-90)" font-size="15" font-weight="700">'+ftin(u.l)+'</text>'+
+      '<text x="'+(x+rw/2)+'" y="'+(y+rh/2-2)+'" font-size="22" font-weight="700">about '+sq+' sq ft</text>'+
+      '<text x="'+(x+rw/2)+'" y="'+(y+rh/2+20)+'" font-size="13" fill="#566670">Photos coming soon</text></g></svg></div>';
+  }
   function renderOffice(o){
     var q = encodeURIComponent(o.mapq);
     var front = o.front ? pic(o.front,'pic-front','Front of '+esc(o.name)+' office building')
@@ -353,7 +375,7 @@
     var units = o.units.length ? o.units.map(function(u){
       var pics = u.photos || (u.photo ? [u.photo] : []);
       var alt = esc(o.name+' '+u.suite);
-      var ph = pics.length ? pic(pics[0],'pic-unit',alt) : '<div class="ph">Unit photo coming soon</div>';
+      var ph = pics.length ? pic(pics[0],'pic-unit',alt) : (u.w && u.l ? plan(u) : '<div class="ph">Unit photo coming soon</div>');
       if (pics.length > 1) {
         ph += '<div class="thumbs">'+pics.map(function(src,i){
           return '<img src="'+esc(src)+'" alt="'+alt+' photo '+(i+1)+'" class="'+(i===0?'on':'')+'" data-src="'+esc(src)+'">';
