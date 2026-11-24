@@ -73,6 +73,38 @@
     @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
   }
 
+  /* hero life */
+  .hero{background:
+      radial-gradient(900px 480px at 85% -10%,rgba(31,122,120,.22),transparent 60%),
+      radial-gradient(700px 420px at -5% 100%,rgba(196,151,63,.20),transparent 60%),
+      linear-gradient(180deg,#e9f4f3 0%,#f7fbfb 55%,#ffffff 100%)}
+  .hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .hero-bg i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+  .hero-bg .b1{width:460px;height:460px;left:-120px;top:-100px;background:#7fd0c8}
+  .hero-bg .b2{width:420px;height:420px;right:-80px;bottom:-140px;background:#f0cf8a}
+  .hero-bg .b3{width:300px;height:300px;left:42%;top:30%;background:#a9dcf0;opacity:.4}
+  .hero-bg .sun{position:absolute;right:8%;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.85),rgba(255,226,150,0) 68%)}
+  .hero-bg svg{position:absolute;left:0;bottom:-1px;width:100%;height:90px}
+  .hero::before{z-index:0}
+  @media(prefers-reduced-motion:no-preference){
+    .hero-bg .b1{animation:drift1 18s ease-in-out infinite alternate}
+    .hero-bg .b2{animation:drift2 22s ease-in-out infinite alternate}
+    .hero-bg .b3{animation:drift1 26s ease-in-out infinite alternate-reverse}
+    .hero-bg .sun{animation:glow 7s ease-in-out infinite alternate}
+    .hero::before{animation:gridmove 40s linear infinite}
+    .collage img{animation:kb 20s ease-in-out infinite alternate}
+    .collage .c2 img{animation-duration:24s}.collage .c3 img{animation-duration:28s}
+    .collage .c1{animation:rise .9s cubic-bezier(.2,.7,.2,1) both,bob 9s ease-in-out 1s infinite}
+    .collage .c2{animation:rise .9s cubic-bezier(.2,.7,.2,1) .12s both,bob 11s ease-in-out 1.2s infinite reverse}
+    .collage .c3{animation:rise .9s cubic-bezier(.2,.7,.2,1) .24s both,bob 10s ease-in-out 1.4s infinite}
+    @keyframes drift1{to{transform:translate(90px,60px) scale(1.12)}}
+    @keyframes drift2{to{transform:translate(-110px,-50px) scale(1.1)}}
+    @keyframes glow{from{opacity:.55;transform:scale(.92)}to{opacity:1;transform:scale(1.12)}}
+    @keyframes gridmove{to{background-position:56px 56px,56px 56px}}
+    @keyframes kb{from{transform:scale(1)}to{transform:scale(1.09)}}
+    @keyframes bob{50%{translate:0 -9px}}
+  }
+
   /* sections */
   section{padding:92px 0}
   section.tint{background:var(--mist)}
@@ -202,6 +234,7 @@
 <main id="top">
 
 <div class="hero">
+  <div class="hero-bg" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i><span class="sun"></span><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 50C240 90 480 10 720 40s480 50 720 10V90H0Z" fill="#fff" opacity=".6"/><path d="M0 70C300 30 560 90 840 60s420-30 600 0V90H0Z" fill="#fff"/></svg></div>
   <div class="wrap hero-grid">
     <div class="reveal">
       <div class="badge"><i></i> Suites available in Port Richey and Trinity</div>
