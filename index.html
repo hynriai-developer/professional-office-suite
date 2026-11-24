@@ -204,7 +204,7 @@
 <div class="hero">
   <div class="wrap hero-grid">
     <div class="reveal">
-      <div class="badge"><i></i> Suites available in Port Richey, Trinity and Spring Hill</div>
+      <div class="badge"><i></i> Suites available in Port Richey and Trinity</div>
       <h1>Office space that feels like your business already lives there.</h1>
       <p class="sub">Private suites, shared conference rooms and a landlord who picks up the phone. Move in with a simple lease and room to grow.</p>
       <div class="actions">
@@ -281,14 +281,10 @@
         <label for="suite">Interested in</label>
         <select id="suite">
           <option>Not sure yet</option>
-          <option>Oak Trail Way, Suite 102</option>
           <option>Oak Trail Way, Suite 105</option>
           <option>Oak Trail Way, Suite 108</option>
           <option>Oak Trail Way, Suite 111</option>
           <option>Seven Springs Boulevard, Suite 406</option>
-          <option>Mariner Boulevard, Suite 202</option>
-          <option>Mariner Boulevard, Suite 203</option>
-          <option>Mariner Boulevard, 2174 Mariner Blvd</option>
           <option>Mariner Boulevard (future openings)</option>
         </select>
       </div>
@@ -315,7 +311,7 @@
 
   /* ====== EDIT HERE: office photos and unit details ======
      Photos live in images/Port Richey, images/Trinity and images/Spring Hill (file names must match exactly).
-     front: front-of-building photo (blank = placeholder). units: suite name, size (e.g. "450 sq ft"), photos. */
+     front: front-of-building photo (blank = placeholder). units: suite name, leased:true hides it from the site (keep its photos and size for when it opens), size (e.g. "450 sq ft"), photos. */
   var OFFICES = [
     { id:'port-richey', tab:'Port Richey', name:'Oak Trail Way', city:'Port Richey',
       addr:'11923 Oak Trail Way, Port Richey, FL 34668', mapq:'11923 Oak Trail Way, Port Richey, FL 34668',
@@ -326,7 +322,7 @@
            {name:'Conference Room', desc:'A large conference room available to tenants of the building.', size:'11′9″ × 17′9″ · about 209 sq ft', photos:['images/Port Richey/PR Conference Room.jpg']},
            {name:'Small Meeting Room', desc:'A private round-table meeting room for small client meetings.', size:'9′2″ × 11′3″ · about 103 sq ft', photos:['images/Port Richey/PR Meeting Room.jpg']},
            {name:'Media Room (Suite 101)', desc:'A shared media room with studio lighting and a backdrop, available to tenants.', size:'15′10″ × 10′2″ · about 161 sq ft', photos:['images/Port Richey/PR Media Room.jpg']} ],
-      units:[ {suite:'Suite 102', w:125, l:129, size:'10′5″ × 10′9″ · about 112 sq ft', photos:['images/Port Richey/PR 102.jpg','images/Port Richey/PR 102-2.jpg']},
+      units:[ {suite:'Suite 102', leased:true, w:125, l:129, size:'10′5″ × 10′9″ · about 112 sq ft', photos:['images/Port Richey/PR 102.jpg','images/Port Richey/PR 102-2.jpg']},
               {suite:'Suite 105', size:'', photo:''}, {suite:'Suite 111', w:136, l:121, size:'11′4″ × 10′1″ · about 114 sq ft', photo:''},
               {suite:'Suite 108', w:137, l:128, size:'11′5″ × 10′8″ · about 122 sq ft', photos:['images/Port Richey/PR 108.jpg','images/Port Richey/PR 108-2.jpg']} ] },
     { id:'trinity', tab:'Trinity', name:'Seven Springs Boulevard', city:'Trinity',
@@ -339,9 +335,9 @@
       addr:'2166\u20132176 Mariner Blvd, Spring Hill, FL 34609', mapq:'2172 Mariner Blvd, Spring Hill, FL 34609',
       blurb:'Office and retail-style spaces on Mariner Boulevard, a busy Spring Hill commercial route.',
       front:'images/Spring Hill/SH Front.jpg',
-      units:[ {suite:'Suite 202', size:'', photos:['images/Spring Hill/SH 202-2.jpg']},
-              {suite:'Suite 203', size:'', photos:['images/Spring Hill/SH 203-3.jpg']},
-              {suite:'2174 Mariner Blvd', size:'', photos:['images/Spring Hill/SH 2174-2.jpg','images/Spring Hill/SH 2174.jpg']} ] }
+      units:[ {suite:'Suite 202', leased:true, size:'', photos:['images/Spring Hill/SH 202-2.jpg']},
+              {suite:'Suite 203', leased:true, size:'', photos:['images/Spring Hill/SH 203-3.jpg']},
+              {suite:'2174 Mariner Blvd', leased:true, size:'', photos:['images/Spring Hill/SH 2174-2.jpg','images/Spring Hill/SH 2174.jpg']} ] }
   ];
 
   function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
@@ -372,7 +368,8 @@
     var q = encodeURIComponent(o.mapq);
     var front = o.front ? pic(o.front,'pic-front','Front of '+esc(o.name)+' office building')
                         : '<div class="ph front">Front-of-building photo coming soon</div>';
-    var units = o.units.length ? o.units.map(function(u){
+    var openUnits = o.units.filter(function(u){ return !u.leased; });
+    var units = openUnits.length ? openUnits.map(function(u){
       var pics = u.photos || (u.photo ? [u.photo] : []);
       var alt = esc(o.name+' '+u.suite);
       var ph = pics.length ? pic(pics[0],'pic-unit',alt) : (u.w && u.l ? plan(u) : '<div class="ph">Unit photo coming soon</div>');
@@ -384,7 +381,7 @@
       var size = u.size ? esc(u.size) : 'Size: to be added';
       return '<div class="unit">'+ph+'<div class="unit-b"><h4>'+esc(u.suite)+'</h4><div class="sz">'+size+'</div>'+
              '<a href="#contact" data-suite="'+esc(o.name+', '+u.suite)+'">Inquire about this unit</a></div></div>';
-    }).join('') : '<div class="empty">No units are listed here right now. Contact us about upcoming openings.</div>';
+    }).join('') : '<div class="empty">No suites are open here right now. Contact us about upcoming openings.</div>';
     var shared = (o.shared||[]).map(function(x){
       var pics=x.photos||[];
       var ph = pics.length ? pic(pics[0],'pic-unit',esc(x.name)) : '<div class="ph">Photo coming soon</div>';
